@@ -25,6 +25,20 @@
       app.use(express.json());
 
 
+// Session 
+   const session = require('express-session');
+   // Config Session
+      const sessionConfig = session({
+         secret: 'topsecretsessionIDsecret',
+         resave: false,
+         saveUninitialized: false,
+         store: MongoStore.create({ mongoUrl: process.env.CONNECTION_STRING }),
+         cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+            httpOnly: true
+         }
+      })
+
 // Start server
    const PORT = 3000;
    app.on('pronto', () => {
