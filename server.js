@@ -14,6 +14,7 @@
             app.emit('pronto')
          }).catch((e) => {console.log(e)});
 
+         
 // Configs app
    // Request config 
       app.use(express.urlencoded({ extended:true }));
@@ -27,7 +28,7 @@
 
 // Session 
    const session = require('express-session');
-   // Config Session
+   // Config session
       const sessionConfig = session({
          secret: 'topsecretsessionIDsecret',
          resave: false,
@@ -38,6 +39,34 @@
             httpOnly: true
          }
       })
+      app.use(sessionConfig);
+
+// Flash msgs 
+   const flash = require('connect-flash');
+   app.use(flash());
+
+
+// Views config
+   app.set('views', path.resolve(__dirname, 'src', 'views'));
+   app.set('view engine', 'ejs');
+
+
+// CRSF (csurf)
+   const csrf = require('csurf');
+   app.use(csrf());
+
+
+// Middlewares
+   const { csrfAllSendToken, checkCsrfToken } = require('./src/middlewares/middleware.js')
+   // use middlewares
+      app.use(csrfAllSendToken);
+      app.use(checkCsrfToken);
+
+
+// Routes
+   const routes = require('./routes');
+   app.use(routes);
+
 
 // Start server
    const PORT = 3000;
