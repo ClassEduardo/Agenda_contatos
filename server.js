@@ -1,7 +1,7 @@
 // Modules express
    const express = require('express');
    const app = express();
-   const path = require('paths');
+   const path = require('path');
 
 // Mongoose - dotenv
    require('dotenv').config();
@@ -9,7 +9,7 @@
    const MongoStore = require('connect-mongo');
    // Config
       mongoose.connect(process.env.CONNECTION_STRING, {
-         useNewUrl: true, useUnifiedTopology: true}).then(() => {
+         useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
             console.log('Flag db conected');
             app.emit('pronto')
          }).catch((e) => {console.log(e)});
@@ -49,7 +49,7 @@
 // Views config
    app.set('views', path.resolve(__dirname, 'src', 'views'));
    app.set('view engine', 'ejs');
-
+ 
 
 // CRSF (csurf)
    const csrf = require('csurf');
