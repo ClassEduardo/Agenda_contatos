@@ -3,7 +3,3 @@ exports.index = (req, res) => {
    res.render('index');
    return
 }
-
-exports.indexPost = (req, res) => {
-   res.send(req.body);
-}

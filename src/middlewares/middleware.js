@@ -4,8 +4,9 @@ exports.csrfAllSendToken = (req, res, next) => {
 }
 
 exports.checkCsrfToken = (err, req, res, next) => {
-   if(err && err === 'EBADCSRFTOKEN') {
+   if(err) {
       console.log(err);
-      return res.render('404');
+      return res.render('err404');
    }
+   next();
 }
