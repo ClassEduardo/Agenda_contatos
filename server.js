@@ -57,8 +57,9 @@
 
 
 // Middlewares
-   const { csrfAllSendToken, checkCsrfToken } = require('./src/middlewares/middleware')
-   // use middlewares
+   const { csrfAllSendToken, checkCsrfToken, errorsMassages } = require('./src/middlewares/middleware')
+   app.use(errorsMassages);
+   // use middlewaress
       app.use(csrfAllSendToken);
       app.use(checkCsrfToken);
 

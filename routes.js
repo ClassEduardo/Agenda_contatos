@@ -11,6 +11,7 @@
 
 // Routes login
    route.get('/login/index', loginController.index)
+   route.post('/login/register', loginController.register)
 
 // Export router
    module.exports = route;
