@@ -10,8 +10,9 @@
    route.get('/', homeController.index);
 
 // Routes login
-   route.get('/login/index', loginController.index)
-   route.post('/login/register', loginController.register)
+   route.get('/login/index', loginController.index);
+   route.post('/login/login', loginController.login);
+   route.post('/login/register', loginController.register);
 
 // Export router
    module.exports = route;

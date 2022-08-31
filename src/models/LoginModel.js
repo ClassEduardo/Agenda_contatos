@@ -24,13 +24,23 @@
          this.valida();
          if(this.errors.length > 0) return;
          
-         try {
-            const salt = bcryptjs.genSaltSync();
-            this.body.password = bcryptjs.hashSync(this.body.password, salt);
-            this.user = await LoginModel.create(this.body);
-         } catch(e) {
-            console.log(e)
-         };
+         await this.checkExistUser();
+         
+         if(this.errors.length > 0) return;
+
+         const salt = bcryptjs.genSaltSync();
+         this.body.password = bcryptjs.hashSync(this.body.password, salt);
+         
+         
+         this.user = await LoginModel.create(this.body);
+      
+         console.log(e)
+         
+      }
+
+      async checkExistUser() {
+         const user = await LoginModel.findOne({ email: this.body.email });
+         if(user) this.errors.push('Usuário já existe.');
       }
 
       valida() {

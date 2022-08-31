@@ -16,17 +16,19 @@ exports.register = async (req, res) => {
          req.session.save( () => {
             return res.redirect('back');
          });
+         return;
       };
 
-
-   // Case success
-   req.flash('success', 'Seu usuário foi criado com sucesso.');
-   req.session.save( () => {
-      return res.redirect('back');
-   });
+      // Case success
+      req.flash('success', 'Seu usuário foi criado com sucesso.');
+      req.session.save( () => {
+         return res.redirect('back');
+      });
 
    } catch(e) {
       console.log(e);
       return res.render('err404')
    }
-}
+};
+
+
