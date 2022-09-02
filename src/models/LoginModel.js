@@ -20,6 +20,29 @@
          this.user = null;
       };
 
+      async login() {
+         this.valida();
+         if(this.errors.length > 0) return;
+
+         await this.checkForLogin();
+      }
+
+      async checkForLogin() {
+         this.user = await LoginModel.findOne({ email: this.body.email });
+
+         if(!this.user) {
+            this.errors.push('Usuário não existe ou e-mail incorreto.');
+            return;
+         }
+
+         if(!bcryptjs.compareSync(this.body.password, this.user.password)) {
+            this.errors.push('Senha incorreta.');
+            this.user = null;
+            return;
+         }
+      }
+
+
       async register() {
          this.valida();
          if(this.errors.length > 0) return;
@@ -33,14 +56,12 @@
          
          
          this.user = await LoginModel.create(this.body);
-      
-         console.log(e)
          
       }
 
       async checkExistUser() {
-         const user = await LoginModel.findOne({ email: this.body.email });
-         if(user) this.errors.push('Usuário já existe.');
+         this.user = await LoginModel.findOne({ email: this.body.email });
+         if(this.user) this.errors.push('Usuário já existe.');
       }
 
       valida() {

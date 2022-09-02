@@ -1,5 +1,5 @@
 exports.index = (req, res) => {
    console.log('flag HomePage');
-   res.render('index');
+   res.render('homePage');
    return
 }
