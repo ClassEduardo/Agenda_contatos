@@ -9,7 +9,6 @@ exports.register = async (req, res) => {
    try {
       const login = new Login(req.body);
       await login.register();
-   
 
       // Case error
       if(login.errors.length > 0) {

@@ -1,5 +1,8 @@
-exports.index = (req, res) => {
+const Contact = require('../models/ContactsModel')
+
+exports.index = async (req, res) => {
    console.log('flag HomePage');
-   res.render('homePage');
+   const contacts = await Contact.searchContacts();
+   res.render('homePage', { contacts });
    return
 }

@@ -3,54 +3,59 @@
    
 <section class="container">
 
-      <div class="row align-items-center">
-         <div class="col-2"></div>
+   <div class="row align-items-center">
+      <div class="col-2"></div>
 
-         <div class="col-8 my-3">
-            <h1 class="display-1 text-center fw-semibold">Contatos</h1>
-            <p class="text-center lead fw-normal">Crie ou edite seus contatos.</p>
+      <div class="col-8 my-3">
+         <h1 class="display-1 text-center fw-semibold">Contatos</h1>
+         <p class="text-center lead fw-normal">Crie ou edite seus contatos.</p>
 
-            <%- include('./includes/massages') %>
+         <%- include('./includes/massages') %>
 
-            <div class="row align-items-start">
-               <div class="col-lg">
-                  <h4 class="text-center fs-1 mb-3">Dados do contato</h4>
+         <div class="row align-items-start">
+            <div class="col-lg">
+               <h4 class="text-center fs-1 mb-3">Dados do contato</h4>
+               
+               <% if(idContact._id) { %>
+                  <form action="/contato/editContactRoutForm/<%= idContact._id %>" method="post" class="text-start">
+               <% } else { %>
+                  <form action="/contato/sendContactBD" method="post" class="text-start">
+               <% } %>
+               
 
-                  <form action="/contato/register" method="post" class="text-start">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <div class="mb-3">
+                     <label class="form-label m-0 fs-4">Nome:</label>
+                     <div class="form-text m-0 fs-6">Nome ou apelido do contato.</div>
+                     <input value="<%= idContact.nome %>" type="text" class="form-control w-75" name="nome">
+                  </div>
 
-                     <div class="mb-3">
-                        <label class="form-label m-0 fs-4">Nome:</label>
-                        <div class="form-text m-0 fs-6">Nome ou apelido do contato.</div>
-                        <input type="text" class="form-control w-75" name="nome">
-                     </div>
+                  <div class="mb-3">
+                     <label class="form-label m-0 fs-4">Sobrenome:</label>
+                     <div class="form-text m-0 fs-6">Sobrenome ou verdadeiro nome do contato.</div>
+                     <input value="<%= idContact.sobrenome %>" type="text" class="form-control w-75" name="sobrenome">
+                  </div>
 
-                     <div class="mb-3">
-                        <label class="form-label m-0 fs-4">Sobrenome:</label>
-                        <div class="form-text m-0 fs-6">Sobrenome ou verdadeiro nome do contato.</div>
-                        <input type="text" class="form-control w-75" name="sobrenome">
-                     </div>
+                  <div class="mb-3">
+                     <label class="form-label m-0 fs-4">Email:</label>
+                     <div class="form-text m-0 fs-6">Email do contato.</div>
+                     <input value="<%= idContact.email %>" type="email" class="form-control w-75" name="email">
+                  </div>
 
-                     <div class="mb-3">
-                        <label class="form-label m-0 fs-4">Email:</label>
-                        <div class="form-text m-0 fs-6">Email do contato.</div>
-                        <input type="email" class="form-control w-75" name="email">
-                     </div>
+                  <div class="mb-3">
+                     <label class="form-label m-0 fs-4">Cel:</label>
+                     <div class="form-text m-0 fs-6">Celular ou telefone do contato.</div>
+                     <input value="<%= idContact.celular %>" type="tel" class="form-control w-75" name="celular">
+                  </div>
 
-                     <div class="mb-3">
-                        <label class="form-label m-0 fs-4">Cel:</label>
-                        <div class="form-text m-0 fs-6">Celular ou telefone do contato.</div>
-                        <input type="tel" class="form-control w-75" name="celular">
-                     </div>
-
-                     <button type="submit" class="btn btn-primary">Salvar</button>
-                   </form>
-               </div>
+                  <button type="submit" class="btn btn-primary">Salvar</button>
+                  </form>
             </div>
-
          </div>
+
       </div>
+   </div>
 
 </section>
   
