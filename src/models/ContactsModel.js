@@ -29,7 +29,7 @@ Contact.prototype.register = async function() {
 Contact.prototype.valida = function() {
    this.cleanUp();
 
-   if(this.body.nome && !validator.isEmail(this.body.email)) { 
+   if(this.body.email && !validator.isEmail(this.body.email)) { 
       this.errors.push('E-mail inválido');
    };
 
@@ -58,7 +58,6 @@ Contact.prototype.cleanUp = function() {
 Contact.prototype.editContactRoutForm = async function(id) {
    if( typeof id !== 'string') return;
 
-   this.valida();
 
    if(this.errors.length > 0) return;
 
@@ -74,9 +73,20 @@ Contact.prototype.editContactRoutForm = async function(id) {
 
 
    Contact.searchContacts = async function() {
-      const idContacts = await ContactModel.find().sort({ dataCriação: -1 });
+      const idContacts = await ContactModel.find();
       return idContacts;
    }
+   
+
+   Contact.deleteCntt = async function(id) {
+      if( typeof id !== 'string') return;
+
+   
+      const idContacts = await ContactModel.findOneAndDelete({ _id: id });
+      return idContacts;
+
+   }
+
    
 
 module.exports = Contact;

@@ -12,42 +12,38 @@
 
             <%- include('./includes/massages') %>
 
+
+            <% if( contacts.length > 0 ) { %>
             <div class="table-responsive">
                <table class="table table-striped">
                   <thead class="table-dark">
                      <tr>
-                       <th scope="col">#</th>
-                       <th scope="col">Nomes</th>
+                       <th scope="col">Nome</th>
                        <th scope="col">Sobrenome</th>
                        <th scope="col">Cel</th>
-                       <th scope="col">e-mail</th>
+                       <th scope="col">E-mail</th>
+                       <th scope="col">Editar</th>
+                       <th scope="col">Excluir</th>
                      </tr>
                    </thead>
                    <tbody class="table-group-divider">
-                     <tr>
-                       <th scope="row">1</th>
-                       <td>Mark</td>
-                       <td>Otto</td>
-                       <td>041 99736-6392</td>
-                       <td>mdo@gmail.com</td>
-                     </tr>
-                     <tr>
-                       <th scope="row">2</th>
-                       <td>Jacob</td>
-                       <td>Thornton</td>
-                       <td>041 99736-6392</td>
-                       <td>fat@gmail.com</td>
-                     </tr>
-                     <tr>
-                       <th scope="row">3</th>
-                       <td>Larry</td>
-                       <td>The Bird</td>
-                       <td>041 99736-6392</td>
-                       <td>twitt@gmail.com</td>
-                     </tr>
+                     <% contacts.forEach(cntts => { %>
+                        <tr>
+                           <td><%= cntts.nome %></td>
+                           <td><%= cntts.sobrenome %></td>
+                           <td><%= cntts.celular %></td>
+                           <td><%= cntts.email %></td>
+                           <td> <a href="/contato/editContact/<%= cntts._id %>">Editar</a> </td>
+                           <td> <a class="text-danger" href="/contato/deleteContat/<%= cntts._id %>">Excluir</a> </td>
+                         </tr>
+    
+                     <% });  %>
                    </tbody>
                </table>
             </div>
+            <% } else { %>
+               <p class="text-center lead">Ainda não existem contatos salvos</p>
+            <% }; %>
 
          </div>
          
@@ -57,3 +53,4 @@
 </section>
   
 <%- include('./includes/footer') %>
+

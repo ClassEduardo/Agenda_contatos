@@ -69,5 +69,20 @@ exports.editContactRoutForm = async function(req, res, next) {
       return res.render('err404')
 
     }
-
 };
+
+exports.deleteContat = async function(req, res, next) {
+   if(!req.params.id) return res.render('err404');
+
+   const idContact = await Contact.deleteCntt(req.params.id)
+   if(!idContact) {
+      return res.render('err404');
+   }
+
+   req.flash('success' , 'Contato deletado com sucesso.');
+   req.session.save(() => {
+      return res.redirect(`back`);
+   });
+   return ;
+
+}

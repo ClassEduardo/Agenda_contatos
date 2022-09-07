@@ -23,6 +23,7 @@
    route.post('/contato/sendContactBD', loginRequired, contatosController.sendContactBD);
    route.get('/contato/editContact/:id', loginRequired, contatosController.editContact);
    route.post('/contato/editContactRoutForm/:id', loginRequired, contatosController.editContactRoutForm);
+   route.get('/contato/deleteContat/:id', loginRequired, contatosController.deleteContat);
 
 // Export router
    module.exports = route;
