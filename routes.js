@@ -18,9 +18,11 @@
    route.post('/login/register', loginController.register);
    route.get('/login/logout', loginController.logout);
 
-// Routes contact
+// Routes create contact
    route.get('/contato/createContact', loginRequired, contatosController.createContact);
    route.post('/contato/sendContactBD', loginRequired, contatosController.sendContactBD);
+
+//  Route edit contact
    route.get('/contato/editContact/:id', loginRequired, contatosController.editContact);
    route.post('/contato/editContactRoutForm/:id', loginRequired, contatosController.editContactRoutForm);
    route.get('/contato/deleteContat/:id', loginRequired, contatosController.deleteContat);
